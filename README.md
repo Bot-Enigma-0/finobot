@@ -31,6 +31,24 @@ Add your own: write `fn(prices) -> Series of 0..1 positions` and register it in 
   Use a zero-commission / fractional-share broker, and remember the spread (`--fee-pct`).
 - A good backtest does not predict future returns. Watch out for overfitting parameters.
 
-## Next steps
-Paper-trade before going live (e.g. Alpaca or Trading 212 practice accounts), then wire
-up a broker API behind the same strategy interface.
+## Trading 212 (practice account)
+1. In the Trading 212 app, switch to **Practice**, then go to Settings -> API (Beta) and generate a key.
+   Give it only the permissions you need (account, portfolio, orders).
+2. Export the credentials (never commit them):
+   ```bash
+   export T212_API_KEY=...
+   export T212_API_SECRET=...   # if your key came with a secret
+   ```
+3. Do a dry run, then place a real practice order:
+   ```bash
+   python -m finobot.live --t212 AAPL_US_EQ --yahoo AAPL --strategy sma_crossover --budget 50
+   python -m finobot.live --t212 AAPL_US_EQ --yahoo AAPL --strategy sma_crossover --budget 50 --execute
+   ```
+4. Schedule it to run once a day (cron or Task Scheduler).
+
+Notes:
+- It uses the practice server by default. `--live` uses real money and asks you to confirm.
+- Trading 212 tickers look like `AAPL_US_EQ` (US) or `VUSAl_EQ` (London). `Trading212().instruments()` lists them all.
+- The API is beta and strictly rate limited. The client retries after a 429 response.
+- The order is sized from the Trading 212 price when you already hold the stock, otherwise
+  from the Yahoo price, which can be in a different currency. The cash cap stops it overspending.
