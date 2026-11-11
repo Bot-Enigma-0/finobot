@@ -1,6 +1,6 @@
 # Autonomous Quantitative Trading and Research System: Design Proposal
 
-Status: **draft for review. No implementation yet.**
+Status: **SUPERSEDED (2026-11-11)** by `docs/m0/` (new specification). Kept for history; see `docs/m0/01_AUDIT.md` §4 for what changed.
 Date: 2026-11-07
 
 Provider facts (prices, limits, availability) were checked with a quick web search on this date
