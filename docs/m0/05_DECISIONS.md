@@ -1,5 +1,12 @@
 # M0.5: Decisions and assumptions
 
+## A0. Resolved (2026-11-13)
+
+- **Broker:** Trading 212 confirmed as the live broker (no change to the plan).
+- **D2:** real-data ingestion runs on your laptop (option a). Development and CI stay offline.
+- **D1 (data source) still open:** Trading 212 provides no price history, so research data still
+  needs a provider (Tiingo free key recommended).
+
 ## A. Critical decisions needing your input (they block parts of M1)
 
 | ID | Decision | Why it matters | Default if you don't say otherwise |
